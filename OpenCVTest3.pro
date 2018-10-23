@@ -27,14 +27,25 @@ CONFIG += c++11
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
-    ocr.cpp
+    ocr.cpp \
+    videocapture.cpp
 
 HEADERS += \
         mainwindow.h \
-    ocr.h
+    ocr.h \
+    videocapture.h
 
 FORMS += \
         mainwindow.ui
+
+INCLUDEPATH += \
+            D:\software\opencv\build\include \
+            D:\software\tesseract-build\tesseract\tesseract\include
+
+LIBS += \
+    D:\software\opencv\build\x64\vc14\lib\opencv_world330d.lib \
+    D:\software\tesseract-build\tesseract\tesseract\lib\tesseract400d.lib \
+    D:\software\tesseract-build\tesseract\tesseract\lib\Debug\pvt.cppan.demo.danbloomberg.leptonica-1.74.4.lib
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

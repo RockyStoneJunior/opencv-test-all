@@ -24,17 +24,19 @@ MainWindow::MainWindow(QWidget *parent) :
     splitter->addWidget(listwidget1);
     splitter->addWidget(ocr->getSplitter());
 
-    listwidget1->addItem("Optical Character Recognization");
-    listwidget1->addItem("Face Detection");
-    listwidget1->addItem("Pattern Classification");
-    listwidget1->addItem("Distance Measurement");
-    listwidget1->addItem("Camera Calibration");
-    listwidget1->addItem("3D Reconstruction");
-    listwidget1->addItem("Defect Detection");
-    listwidget1->addItem("Robotics Arm Positioning");
-    listwidget1->addItem("QR Code Scan");
+    listwidget1->addItem(tr("Optical Character Recognization"));
+    listwidget1->addItem(tr("Face Detection"));
+    listwidget1->addItem(tr("Pattern Classification"));
+    listwidget1->addItem(tr("Distance Measurement"));
+    listwidget1->addItem(tr("Camera Calibration"));
+    listwidget1->addItem(tr("3D Reconstruction"));
+    listwidget1->addItem(tr("Defect Detection"));
+    listwidget1->addItem(tr("Robotics Arm Positioning"));
+    listwidget1->addItem(tr("QR Code Scan"));
+    listwidget1->addItem(tr("Optical Flow"));
+    listwidget1->addItem(tr("Huff Transformation"));
 
-    splitter->setSizes(QList<int>{100,800});
+    splitter->setSizes(QList<int>{200,Qt::MaximumSize});
 
     setCentralWidget(splitter);
 
