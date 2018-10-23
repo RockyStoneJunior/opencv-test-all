@@ -120,7 +120,7 @@ Ocr::Ocr()
     splitter->addWidget(button_group);
     splitter->addWidget(editor);
 
-    QThread *thread = new QThread;
+    thread = new QThread;
     video_capture = new VideoCapture;
     video_capture->moveToThread(thread);
 
@@ -173,8 +173,16 @@ void Ocr::lineedit1_editing_finished()
     qDebug(str.toLatin1());
 
     disconnect(video_capture, SIGNAL(video_display(cv::Mat)), this, SLOT(video_display(cv::Mat)));
+    thread->terminate();
+
+    thread = new QThread;
     video_capture = new VideoCapture(str);
+    video_capture->moveToThread(thread);
+
+    connect(thread, SIGNAL(started()), video_capture, SLOT(video_capture()));
     connect(video_capture, SIGNAL(video_display(cv::Mat)), this, SLOT(video_display(cv::Mat)));
+
+    thread->start();
 }
 
 Ocr::~Ocr()

@@ -6,6 +6,7 @@
 #include <QSplitter>
 #include <QTextEdit>
 #include <QLineEdit>
+#include <QThread>
 
 #include <opencv2/core/core.hpp>
 
@@ -36,6 +37,7 @@ private:
     QLineEdit *linedit3;
 
     VideoCapture *video_capture;
+    QThread *thread;
 };
 
 #endif // OCR_H
