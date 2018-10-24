@@ -46,7 +46,7 @@ MainWindow::MainWindow(QWidget *parent) :
 void MainWindow::onListClick(QListWidgetItem *item)
 {
     QString str = item->text();
-    qDebug(str.toLatin1());
+    //qDebug(str.toLatin1());
 
     if(str == "Face Detection")
     {

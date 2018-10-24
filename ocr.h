@@ -24,6 +24,7 @@ public:
 public slots:
     void video_display(cv::Mat frame);
     void lineedit1_editing_finished();
+    void open_video_file();
 
 private:
     QSplitter *splitter;

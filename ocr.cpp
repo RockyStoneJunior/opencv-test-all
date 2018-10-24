@@ -10,6 +10,7 @@
 #include <QLineEdit>
 #include <QThread>
 #include <QFont>
+#include <QFileDialog>
 
 #include <opencv2/imgproc/imgproc.hpp>
 #include <opencv2/highgui/highgui.hpp>
@@ -83,15 +84,19 @@ Ocr::Ocr()
     gridlayout->addWidget(new QLabel("Local File"),3,1);
 
     linedit1 = new QLineEdit;
-    connect(linedit1, SIGNAL(editingFinished()), this, SLOT(lineedit1_editing_finished()));
+    linedit1->setText("http://admin:12345@192.168.31.14:8081");
+    connect(linedit1, SIGNAL(returnPressed()), this, SLOT(lineedit1_editing_finished()));
     linedit2 = new QLineEdit;
     linedit3 = new QLineEdit;
+
+    QPushButton *file_button = new QPushButton("Open File");
+    connect(file_button, SIGNAL(clicked()), this, SLOT(open_video_file()));
     //linedit1->setFixedWidth(200);
     //linedit2->setFixedWidth(200);
     gridlayout->addWidget(linedit1, 1, 2, 1, 2);
     gridlayout->addWidget(linedit2, 2, 2, 1, 2);
     gridlayout->addWidget(linedit3, 3, 2, 1, 1);
-    gridlayout->addWidget(new QPushButton("Open File"), 3, 3, 1, 1);
+    gridlayout->addWidget(file_button, 3, 3, 1, 1);
 
     //QVBoxLayout *layout = new QVBoxLayout;
     //layout->addLayout(videolayout);
@@ -124,7 +129,7 @@ Ocr::Ocr()
     video_capture = new VideoCapture;
     video_capture->moveToThread(thread);
 
-    connect(thread, SIGNAL(started()), video_capture, SLOT(video_capture()));
+    connect(thread, SIGNAL(started()), video_capture, SLOT(video_capture_run()));
     connect(video_capture, SIGNAL(video_display(cv::Mat)), this, SLOT(video_display(cv::Mat)));
 
     thread->start();
@@ -171,18 +176,29 @@ void Ocr::lineedit1_editing_finished()
 {
     QString str = linedit1->text();
     qDebug(str.toLatin1());
+    video_capture->change_video_source(str);
 
-    disconnect(video_capture, SIGNAL(video_display(cv::Mat)), this, SLOT(video_display(cv::Mat)));
-    thread->terminate();
+//    disconnect(thread, SIGNAL(started()), video_capture, SLOT(video_capture()));
+//    disconnect(video_capture, SIGNAL(video_display(cv::Mat)), this, SLOT(video_display(cv::Mat)));
+//    thread->terminate();
+//    delete thread;
 
-    thread = new QThread;
-    video_capture = new VideoCapture(str);
-    video_capture->moveToThread(thread);
+//    thread = new QThread;
+//    video_capture = new VideoCapture(str);
+//    video_capture->moveToThread(thread);
 
-    connect(thread, SIGNAL(started()), video_capture, SLOT(video_capture()));
-    connect(video_capture, SIGNAL(video_display(cv::Mat)), this, SLOT(video_display(cv::Mat)));
+//    connect(thread, SIGNAL(started()), video_capture, SLOT(video_capture()));
+//    connect(video_capture, SIGNAL(video_display(cv::Mat)), this, SLOT(video_display(cv::Mat)));
 
-    thread->start();
+//    thread->start();
+}
+
+void Ocr::open_video_file()
+{
+    QString str = QFileDialog::getOpenFileName();
+    qDebug(str.toLatin1());
+    linedit3->setText(str);
+    video_capture->change_video_source(str);
 }
 
 Ocr::~Ocr()
