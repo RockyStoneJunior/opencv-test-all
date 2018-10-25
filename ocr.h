@@ -12,11 +12,11 @@
 
 #include "videocapture.h"
 
-class Ocr : QObject{
+class Ocr : public QSplitter{
     Q_OBJECT
 
 public:
-    Ocr();
+    Ocr(Qt::Orientation);
     ~Ocr();
 
     QSplitter *getSplitter(){return splitter;}

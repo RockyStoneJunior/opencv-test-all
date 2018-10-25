@@ -12,6 +12,7 @@
 #include <QPushButton>
 
 #include "ocr.h"
+#include "houghtransformation.h"
 
 namespace Ui {
 class MyMainWindow;
@@ -36,6 +37,7 @@ private:
     QPushButton *button;
 
     Ocr *ocr;
+    HoughTransformation *hough;
 };
 
 #endif // MAINWINDOW_H

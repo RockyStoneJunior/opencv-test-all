@@ -28,12 +28,16 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
     ocr.cpp \
-    videocapture.cpp
+    videocapture.cpp \
+    houghtransformation.cpp \
+    label.cpp
 
 HEADERS += \
         mainwindow.h \
     ocr.h \
-    videocapture.h
+    videocapture.h \
+    houghtransformation.h \
+    label.h
 
 FORMS += \
         mainwindow.ui

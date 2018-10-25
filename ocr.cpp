@@ -21,21 +21,28 @@
 
 using namespace std;
 
-Ocr::Ocr()
+//Mathematics
+//Software design
+//Electronics design
+//Machenics design
+//Product manufacture
+
+Ocr::Ocr(Qt::Orientation orientation):
+    QSplitter (orientation)
 {
-    splitter = new QSplitter(Qt::Vertical);
+    //splitter = new QSplitter(Qt::Vertical, this);
     original_video = new QLabel;
     target_video = new QLabel;
 
     original_video->setFixedWidth(640);
     original_video->setFixedHeight(480);
     original_video->setFrameStyle(QFrame::StyledPanel | QFrame::Sunken);
-    //original_video->setStyleSheet("border: 1px solid gray;");
+    original_video->setStyleSheet("background: black;");
 
     target_video->setFixedWidth(640);
     target_video->setFixedHeight(480);
     target_video->setFrameStyle(QFrame::StyledPanel | QFrame::Sunken);
-    //target_video->setStyleSheet("border: 1px solid gray;");
+    target_video->setStyleSheet("background: black;");
 
     QPushButton *button = new QPushButton("Start Ocr");
     button->setFixedWidth(60);
@@ -121,9 +128,9 @@ Ocr::Ocr()
     editor = new QTextEdit;
     editor->setFont(QFont("Courier", 16));
 
-    splitter->addWidget(group);
-    splitter->addWidget(button_group);
-    splitter->addWidget(editor);
+    this->addWidget(group);
+    this->addWidget(button_group);
+    this->addWidget(editor);
 
     thread = new QThread;
     video_capture = new VideoCapture;
